@@ -1,8 +1,50 @@
-- name: iOS Build Action
-  uses: yukiarrr/ios-build-action@v1.3.1
-  with:
-    project-path: live2d-demo.xcodeproj
-    p12-base64: ${{ secrets.P12_BASE64 }}
-    mobileprovision-base64: ${{ secrets.MOBILEPROVISION_BASE64 }}
-    code-signing-identity: ${{ secrets.CODE_SIGNING_IDENTITY }}
-    team-id: ${{ secrets.TEAM_ID }}
+name: iOS Deploy
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'ios/live2d-demo.xcodeproj/project.pbxproj'
+
+jobs:
+  deploy:
+    name: Build IPA
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          lfs: true
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14'
+
+      - name: Restore yarn cache
+        uses: c-hive/gha-yarn-cache@v1
+
+      - name: Install Dependencies
+        run: yarn install
+
+      - name: Install Pods
+        working-directory: ios
+        run: pod install --repo-update
+
+      - name: Build Archive
+        uses: yukiarrr/ios-build-action@v1.3.0
+        with:
+          project-path: live2d-demo.xcodeproj
+          p12-base64: ${{ secrets.P12_BASE64 }}
+          mobileprovision-base64: ${{ secrets.MOBILEPROVISION_BASE64 }}
+          code-signing-identity: ${{ secrets.CODE_SIGNING_IDENTITY }}
+          team-id: ${{ secrets.TEAM_ID }}
+          workspace-path: live2d-demo.xcodeproj/project.xcworkspace
+          scheme: Live2d
+          output-path: Live2d.ipa
+
+      - name: Upload IPA
+        env:
+          USER: ${{ secrets.APPSTORE_EMAIL }}
+          PASS: ${{ secrets.UPLOAD_PASSWORD }}
+        run: xcrun altool --upload-app -f "Live2d.ipa" -u "$USER" -p "$PASS"
