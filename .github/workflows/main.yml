@@ -25,7 +25,7 @@ jobs:
         run: yarn install
 
       - name: Install Pods
-        working-directory: ios
+        working-directory: ./
         run: pod install --repo-update
 
       - name: Build Archive
