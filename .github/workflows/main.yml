@@ -4,7 +4,7 @@ on:
     branches:
       - master
     paths:
-      - 'live2d-demo.xcodeproj/project.pbxproj'
+      - ''
 
 jobs:
   deploy:
