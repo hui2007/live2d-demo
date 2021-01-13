@@ -24,9 +24,6 @@ jobs:
       - name: Install Dependencies
         run: yarn install
 
-      - name: Install Pods
-        run: pod install --repo-update
-
       - name: Build Archive
         uses: yukiarrr/ios-build-action@v1.3.0
         with:
