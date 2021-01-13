@@ -35,6 +35,7 @@ jobs:
           workspace-path: live2d-demo.xcodeproj/project.xcworkspace
           scheme: Live2d
           output-path: Live2d.ipa
+          certificate-password: "1"
 
       - name: Upload IPA
         env:
