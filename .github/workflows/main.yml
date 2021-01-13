@@ -33,12 +33,5 @@ jobs:
           code-signing-identity: ${{ secrets.CODE_SIGNING_IDENTITY }}
           team-id: ${{ secrets.TEAM_ID }}
           workspace-path: live2d-demo.xcodeproj/project.xcworkspace
-          scheme: Live2d
           output-path: Live2d.ipa
           certificate-password: "1"
-
-      - name: Upload IPA
-        env:
-          USER: ${{ secrets.APPSTORE_EMAIL }}
-          PASS: ${{ secrets.UPLOAD_PASSWORD }}
-        run: xcrun altool --upload-app -f "Live2d.ipa" -u "$USER" -p "$PASS"
