@@ -27,7 +27,7 @@ jobs:
       - name: Build Archive
         uses: yukiarrr/ios-build-action@v1.3.0
         with:
-          project-path: live2d-demo.xcodeproj
+          project-path: ''
           p12-base64: ${{ secrets.P12_BASE64 }}
           mobileprovision-base64: ${{ secrets.MOBILEPROVISION_BASE64 }}
           code-signing-identity: ${{ secrets.CODE_SIGNING_IDENTITY }}
