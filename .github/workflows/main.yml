@@ -21,9 +21,6 @@ jobs:
         with:
           node-version: '14'
 
-      - name: Restore yarn cache
-        uses: c-hive/gha-yarn-cache@v1
-
       - name: Install Dependencies
         run: yarn install
 
