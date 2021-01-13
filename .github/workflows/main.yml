@@ -1,6 +1,6 @@
 name: iOS Deploy
 on:
-  push:
+ workflow_dispatch:
     branches:
       - master
     paths:
