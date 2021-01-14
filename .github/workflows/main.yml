@@ -32,6 +32,5 @@ jobs:
           mobileprovision-base64: ${{ secrets.MOBILEPROVISION_BASE64 }}
           code-signing-identity: ${{ secrets.CODE_SIGNING_IDENTITY }}
           team-id: ${{ secrets.TEAM_ID }}
-          workspace-path: live2d-demo.xcodeproj
           output-path: Live2d.ipa
           certificate-password: "1"
