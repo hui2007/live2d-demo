@@ -29,6 +29,9 @@ jobs:
         with:
           project-path: 'live2d-demo.xcodeproj'
           code-signing-identity: ${{ secrets.CODE_SIGNING_IDENTITY }}
+          p12-base64: ${{ secrets.P12_BASE64 }}
+          mobileprovision-base64: ${{ secrets.MOBILEPROVISION_BASE64 }}
           team-id: ${{ secrets.TEAM_ID }}
           output-path: Live2d.ipa
           certificate-password: "1"
+          export-method: "ad-hoc"
